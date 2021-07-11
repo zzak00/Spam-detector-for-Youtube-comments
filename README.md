@@ -6,9 +6,11 @@ Spam detector for Youtube comments is a WEB application which aims to classify y
 
 Lanching The App
 ----
-''' 
-python3 app.py
-'''
-
-Demo
+To run the app just copy paste the command below in your command line:
+```sh
+$ python3 app.py
+``` 
 ----
+<p align="center">
+  <img src="test.png" width="500" >
+</p>
