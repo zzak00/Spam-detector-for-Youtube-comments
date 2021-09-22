@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-
+import joblib
 import string
 import csv
 import numpy as np
@@ -55,17 +55,20 @@ def predict():
     df_data = df[['CONTENT', 'CLASS']]
     # Features and Labels
     df_x = df_data['CONTENT']
-    df_y = df_data.CLASS
+    #df_y = df_data.CLASS
     # Extract the features with TFIDFVectorizer
     corpus = preprocess(df_x)
     vectorizer = TfidfVectorizer()
-    X = vectorizer.fit_transform(corpus)
-    X_train, X_test, y_train, y_test = train_test_split(X, df_y, test_size=0.40, random_state=42)
+    vectorizer.fit_transform(corpus)
+    clf= joblib.load('clf.pkl')
+    '''X_train, X_test, y_train, y_test = train_test_split(X, df_y, test_size=0.40, random_state=42)
     # LOGISTIC REGRESSION
     clf =  LogisticRegression(random_state=0)
     clf.fit(X_train, y_train)
     clf.score(X_test, y_test)
-    print(clf.score(X_test, y_test))
+    joblib.dump(clf,'clf.pkl')
+    print(clf.score(X_test, y_test))'''
+
     if request.method == 'POST':
         comment = request.form['comment']
         data = [comment]
